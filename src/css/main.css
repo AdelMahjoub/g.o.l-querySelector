@@ -1,0 +1,23 @@
+html, body {
+    margin: 0;
+    padding: 0;
+}
+
+.grid {
+    margin: 0 auto;
+    position: relative;
+}
+
+.cell {
+    position: absolute;
+    width: 16px;
+    height: 16px;
+}
+
+.cell__live {
+    background-color: #ec0c39;
+}
+
+.cell__dead {
+    background-color: #f7f1f1;
+}
