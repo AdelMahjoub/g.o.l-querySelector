@@ -142,35 +142,43 @@ window.addEventListener('DOMContentLoaded', function() {
         //     }
         // }
 
-        for(let x = 0; x < grid.length; x++) {
-            for(let y = 0; y < grid[x].length; y++) {
-                const coords = `${x}-${y}`;
-                const cellState = grid[x][y];
+//         for(let x = 0; x < grid.length; x++) {
+//             for(let y = 0; y < grid[x].length; y++) {
+//                 const coords = `${x}-${y}`;
+//                 const cellState = grid[x][y];
                 
-                // const cells = document.getElementsByClassName('cell');
-                // const cell = Array.prototype.find.call(cells, c => {
-                //     return c.getAttribute('data-coords') === `${x}-${y}`;
-                // });
+//                 const cells = document.getElementsByClassName('cell');
+//                 const cell = Array.prototype.find.call(cells, c => {
+//                     return c.getAttribute('data-coords') === `${x}-${y}`;
+//                 });
                 
-                const cell = document.querySelector(`.cell[data-coords="${x}-${y}"]`);
+//                 // const cell = document.querySelector(`.cell[data-coords="${x}-${y}"]`);
                 
-                if(cellState) {
-                    if(cell.classList.contains('cell__dead')) {
-                        cell.classList.remove('cell__dead');
-                    }
-                    if(!cell.classList.contains('cell__live')) {
-                        cell.classList.add('cell__live')
-                    }
-                } else {
-                    if(cell.classList.contains('cell__live')) {
-                        cell.classList.remove('cell__live');
-                    }
-                    if(!cell.classList.contains('cell__dead')) {
-                        cell.classList.add('cell__dead')
-                    }
-                }
-            }
-        }
+
+//             }
+//         }
+      // spread on a html collection works ?  Guess so :)
+        const cells = [...document.getElementsByClassName('cell')];
+        cells.map(cell => {
+          const [x, y] = cell.getAttribute('data-coords').split('-').map(Number)
+          const cellState = grid[x][y]
+          if(cellState) {
+              if(cell.classList.contains('cell__dead')) {
+                  cell.classList.remove('cell__dead');
+              }
+              if(!cell.classList.contains('cell__live')) {
+                  cell.classList.add('cell__live')
+              }
+          } else {
+              if(cell.classList.contains('cell__live')) {
+                  cell.classList.remove('cell__live');
+              }
+              if(!cell.classList.contains('cell__dead')) {
+                  cell.classList.add('cell__dead')
+              }
+          }
+        })
+      
 
         requestAnimationFrame(update);
     }
